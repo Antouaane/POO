@@ -7,41 +7,10 @@ from bouton import *
 
 pygame.init()
 
+
 fenetre = pygame.display.set_mode((1000, 900))
-
-
-bg = pygame.image.load("bg_ground.jpg").convert_alpha()
-
-
-def get_police(size): 
-    return pygame.font.Font("font.ttf", size)
-
-def option():
-    while True:
-        OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
-
-        fenetre.fill("black")
-
-        OPTIONS_TEXT = get_police(15).render("rule : dodges cars and collect the coin.", True, "white")
-        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(500, 50))
-        fenetre.blit(OPTIONS_TEXT, OPTIONS_RECT)
-        
-        OPTIONS_TEXT_1 = get_police(15).render("Option: Press Fleche from the top to pause the game", True, "white")
-        OPTIONS_RECT_1 = OPTIONS_TEXT_1.get_rect(center=(500, 200))
-        fenetre.blit(OPTIONS_TEXT_1, OPTIONS_RECT_1)
-
-        OPTIONS_BACK = Bouton(None, (500, 460), "BACK", get_police(75), "white")
-        OPTIONS_BACK.update(fenetre)
-
-        for event in pygame.event.get():
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if OPTIONS_BACK.checkForInput(OPTIONS_MOUSE_POS):
-                     menu()
-
-        pygame.display.flip()
-
-
 route = pygame.image.load("road.png").convert_alpha()
+bg = pygame.image.load("bg_ground.jpg").convert_alpha()
 
 voiture = pygame.image.load("voiture.png").convert_alpha()
 position_voiture = voiture.get_rect()
@@ -224,6 +193,32 @@ def jeu():
 
         
         clock.tick(30)
+        pygame.display.flip()
+def get_police(size): 
+    return pygame.font.Font("font.ttf", size)
+
+def option():
+    while True:
+        OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
+
+        fenetre.fill("black")
+
+        OPTIONS_TEXT = get_police(15).render("Règles : Déplace ta voiture pour récupérer les pieces ! Mais attention aux autres voitures !", True, "white")
+        OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(500, 50))
+        fenetre.blit(OPTIONS_TEXT, OPTIONS_RECT)
+        
+        OPTIONS_TEXT_1 = get_police(15).render("Option: Press Fleche from the top to pause the game", True, "white")
+        OPTIONS_RECT_1 = OPTIONS_TEXT_1.get_rect(center=(500, 200))
+        fenetre.blit(OPTIONS_TEXT_1, OPTIONS_RECT_1)
+
+        OPTIONS_BACK = Bouton(None, (500, 460), "RETOUR", get_police(75), "white")
+        OPTIONS_BACK.update(fenetre)
+
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if OPTIONS_BACK.checkForInput(OPTIONS_MOUSE_POS):
+                     menu()
+
         pygame.display.flip()
         
 def menu():
